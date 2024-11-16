@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <!--
+  Name: Carlos Villarreal
+  Date: 09.13.2024
+  CSC 372-01
+
+  This is the home page of my video game store. It contains a splash section,
+  a search field, navigation controls, and a footer.
+
+-->
+
+    <head>
+        <meta charset="utf-8">
+        <title>PlayStation Nation - Home</title>
+        <link rel="stylesheet" href="styles/styles.css">
+    </head>
+
+    <body>
+
+        <header>
+
+            <nav>
+                <ul class="nav-bar">
+                    <li><a href="../Term%20Project/index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="../Term%20Project/products.html" class="dropbtn">Products</a>
+                        <ul class="dropdown-content">
+                            <li><a href="#">Consoles</a></li>
+                            <li><a href="#">Games</a></li>
+                            <li><a href="#">Accessories</a></li>
+                            <li><a href="#">Decor</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="cart.html">View Shopping Cart</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Sign In</a></li>
+                    <li><a href="#">Sign Up</a></li>
+                </ul>
+            </nav>
+
+            <h1><u>PlayStation Nation</u></h1>
+
+            <h3>Your journey to greatness starts here.</h3>
+
+        </header>
+
+        <main>
+
+            <section class="splash">
+
+                <h1>Welcome to the PlayStation Nation!</h1>
+                <img class="logo" src="images/PlayStation%20Nation%20logo.png" alt="website-logo">
+
+                <p>The PlayStation Nation is a retro video game store that
+                    specializes
+                    in selling all things PlayStation! We sell every console froms the
+                    original PlayStation all the
+                    way to the PlayStation 5. We are not limited to consoles, we
+                    also
+                    sell games (duh), accessories,
+                    T-shirts, and decor! Purchase all things PlayStation here at
+                    the PlayStation Nation, where <b>greatness awaits</b> as
+                    Sony once said.<br>
+                </p>
+
+                <h3> <em>Your journey to greatness starts here.</em></h3>
+
+                <h2><u>Featured Products: </u></h2>
+
+                <section class="featured-products">
+
+                    <figure>
+                        <img src="images/Consoles/Original-PS3.png" alt="PlayStation 3">
+                        <figcaption><b>Original PlayStation 3: $249.99</b>
+                        </figcaption>
+                    </figure>
+
+                    <figure>
+                        <img src="images/Consoles/PlayStation-Portable.jpg" alt="PSP">
+                        <figcaption><b>PlayStation Portable (PSP): $99.99</b>
+                        </figcaption>
+                    </figure>
+
+                    <figure>
+                        <img src="images/Consoles/Original-PlayStation.jpg" alt="PS1">
+                        <figcaption><b>Original PlayStation (PS1): $129.99</b>
+                        </figcaption>
+                    </figure>
+
+                </section>
+
+                
+                    Interested? <a href="#">Sign up for an account today!</a>
+                
+
+            </section>
+
+            <section class="search-field">
+
+                <h2>Search for an product</h2>
+
+                <form action="/search" method="get">
+                    <label for="site-search">Search:</label>
+                    <input type="search" id="site-search" name="q"
+                        placeholder="Type product name here">
+                    <button type="submit">Go</button>
+                </form>
+
+            </section>
+
+        </main>
+
+        <footer class="pre-format">
+            Copyright © 2024 PlayStation Nation
+            PlayStation Nation Productions
+            All rights reserved
+        </footer>
+
+    </body>
+
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<!--
+  Name: Carlos Villarreal
+  Date: 10.10.2024
+  CSC 372-01
+
+  This is my admin-products page. This page gives a quick look at all the listed products. It will let the admin
+  delete, archive, or edit products. 
+
+-->
+
+<head>
+    <meta charset="utf-8">
+    <title>PlayStation Nation - Admin Products</title>
+    <link rel="stylesheet" href="../styles/admin.css">
+    <script src="products-script.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+
+        <nav>
+            <ul class="nav-bar">
+                <li><a href="../index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="../products.html" class="dropbtn">Products</a>
+                    <ul class="dropdown-content">
+                        <li><a href="#">Consoles</a></li>
+                        <li><a href="#">Games</a></li>
+                        <li><a href="#">Accessories</a></li>
+                        <li><a href="#">Decor</a></li>
+                    </ul>
+                </li>
+                <li><a href="admin-upload.html">Admin Upload</a></li>
+                <li><a href="admin-products.html">Admin Products</a></li>
+                <li><a href="../index.html">Sign Out</a></li>
+            </ul>
+        </nav>
+
+        <h1><u>PlayStation Nation</u></h1>
+
+        <h3>Your journey to greatness starts here.</h3>
+
+    </header>
+
+    <h1><u>Administrator</u></h1>
+
+    <main class="main-content">
+        <h2><u>Administrator Product Listing Page</u></h2>
+
+        <label for="category-filter">Filter by Category:</label>
+        <select id="category-filter">
+            <option value="all">All Categories</option>
+            <option value="Consoles">Consoles</option>
+            <option value="Games">Games</option>
+            <option value="Accessories">Accessories</option>
+            <option value="Decor">Decor</option>
+        </select>
+
+        <table class="product-table">
+
+            <!--Table headers-->
+            <thead class="table-header">
+                <tr>
+                    <th>Product ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Category ID</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody class="table-body">
+
+                <tr class="table-row">
+                    <td>101</td>
+                    <td>Original PlayStation 5</td>
+                    <td>Welcome to the next generation of video game consoles...</td>
+                    <td class="category">Consoles</td>
+                    <td><img class="product-image" src="../images/Consoles/Original-PlayStation-5.png" alt="PS5"></td>
+                    <td>$499.99</td>
+                    <td>
+                        <button class="delete">Delete</button>
+                        <button class="archive">Archive</button>
+                        <a class="edit" href="products-edit.html">Edit</a>
+                    </td>
+                </tr>
+
+                <tr class="table-row">
+                    <td>201</td>
+                    <td>Gran Turismo</td>
+                    <td>The racing simulator that started it all is here! Play the original PS1 release today!</td>
+                    <td class="category">Games</td>
+                    <td><img class="product-image" src="../images/Games/Gran-Turismo-PS1.png" alt="Gran Turismo"></td>
+                    <td>$29.99</td>
+                    <td>
+                        <button class="delete">Delete</button>
+                        <button class="archive">Archive</button>
+                        <a class="edit" href="products-edit.html">Edit</a>
+                    </td>
+                </tr>
+
+                <tr class="table-row">
+                    <td>301</td>
+                    <td>DualSense Controller</td>
+                    <td>Elevate your gaming with the DualSense Wireless Controller...</td>
+                    <td class="category">Accessories</td>
+                    <td><img class="product-image" src="../images/Accesories/DualSense.png" alt="DualSense"></td>
+                    <td>$69.99</td>
+                    <td>
+                        <button class="delete">Delete</button>
+                        <button class="archive">Archive</button>
+                        <a class="edit" href="products-edit.html">Edit</a>
+                    </td>
+                </tr>
+
+                <tr class="table-row">
+                    <td>401</td>
+                    <td>PlayStation Icon Lights</td>
+                    <td>Decorate your gaming setup with these shiny icon lights! They are an official PlayStation
+                        product!</td>
+                    <td class="category">Decor</td>
+                    <td><img class="product-image" src="../images/Decor/PlayStation-Icon-Lights.png" alt="PlayStation Icon Lights"></td>
+                    <td>$25.99</td>
+                    <td>
+                        <button class="delete">Delete</button>
+                        <button class="archive">Archive</button>
+                        <a class="edit" href="products-edit.html">Edit</a>
+                    </td>
+                </tr>
+
+                <!-- Only showing 4 products, 1 from each category for prototyping purposes. -->
+            </tbody>
+        </table>
+
+        <div class="add-product">
+            <button id="add-product-button">Add New Product</button>
+        </div>
+
+    </main>
+
+
+    <footer class="pre-format">
+        Copyright © 2024 PlayStation Nation
+        PlayStation Nation Productions
+        All rights reserved
+    </footer>
+
+</body>
+
+</html>

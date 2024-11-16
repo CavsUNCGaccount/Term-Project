@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<!--
+  Name: Carlos Villarreal
+  Date: 10.09.2024
+  CSC 372-01
+
+  This is my admin-upload page. it will let the admin select a file with bulk product data in JSON format to upload
+  to the database.
+
+-->
+
+<head>
+    <meta charset="utf-8">
+    <title>PlayStation Nation - Admin Upload</title>
+    <link rel="stylesheet" href="../styles/admin.css">
+</head>
+
+<body>
+
+    <header>
+
+        <nav>
+            <ul class="nav-bar">
+                <li><a href="../index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="../products.html" class="dropbtn">Products</a>
+                    <ul class="dropdown-content">
+                        <li><a href="#">Consoles</a></li>
+                        <li><a href="#">Games</a></li>
+                        <li><a href="#">Accessories</a></li>
+                        <li><a href="#">Decor</a></li>
+                    </ul>
+                </li>
+                <li><a href="admin-upload.html">Admin Upload</a></li>
+                <li><a href="admin-products.html">Admin Products</a></li>
+                <li><a href="../index.html">Sign Out</a></li>
+            </ul>
+        </nav>
+
+        <h1><u>PlayStation Nation</u></h1>
+
+        <h3>Your journey to greatness starts here.</h3>
+
+    </header>
+
+    <h1><u>Administrator</u></h1>
+
+    <main class="main-content">
+
+        <h2><u>Administrator Bulk Upload</u></h2>
+
+        <section>
+            <h3>Upload Bulk Product Data</h3>
+            <p>Upload a JSON file containing product data in the following format:</p>
+            <pre><code>
+[
+    {
+        "product_id": "101",
+        "name": "Original PlayStation 5",
+        "description": "Welcome to the next generation of video game consoles. With an ultra fast SSD that gives it incredibly fast loading times, the PS5 is a piece of hardware all PlayStation enthusiasts must own.",
+        "category id": "Consoles",
+        "price": 499.99,
+        "stock": 50
+    },
+    {
+        "product_id": "301",
+        "name": "DualSense Controller",
+        "description": "Elevate your gaming with the DualSense Wireless Controller, featuring advanced haptic feedback and adaptive triggers for immersive experiences.",  
+        "category id": "Accessories",
+        "price": 69.99,
+        "stock": 200
+    }
+]
+            
+            </code></pre>
+
+            <form action="#" method="POST" enctype="multipart/form-data">
+                <label for="file-upload">Choose a JSON file:</label>
+                <input type="file" id="file-upload" name="file-upload" accept=".json">
+                <br><br>
+                <button type="submit">Upload File</button>
+            </form>
+
+            <p><strong>Note:</strong> Only JSON files are accepted. Please ensure the file format matches the example
+                above.</p>
+        </section>
+    </main>
+
+    <footer class="pre-format">
+        Copyright © 2024 PlayStation Nation
+        PlayStation Nation Productions
+        All rights reserved
+    </footer>
+
+</body>
+
+</html>

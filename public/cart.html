@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<!--
+  Name: Carlos Villarreal
+  Date: 09.28.2024
+  CSC 372-01
+
+  This is the shopping cart page of my video game store. Right now, it is hardcoded to show 
+  off the features of a shopping cart page. 
+-->
+
+<head>
+    <meta charset="utf-8">
+    <title>PlayStation Nation - Shopping Cart</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+
+<body>
+
+    <header>
+
+        <nav>
+            <ul class="nav-bar">
+                <li><a href="../Term%20Project/index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="../Term%20Project/products.html" class="dropbtn">Products</a>
+                    <ul class="dropdown-content">
+                        <li><a href="#">Consoles</a></li>
+                        <li><a href="#">Games</a></li>
+                        <li><a href="#">Accessories</a></li>
+                        <li><a href="#">Decor</a></li>
+                    </ul>
+                </li>
+                <li><a href="cart.html">View Shopping Cart</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Sign In</a></li>
+                <li><a href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+
+        <h1><u>PlayStation Nation</u></h1>
+
+        <h3>Your journey to greatness starts here.</h3>
+
+    </header>
+
+    <main>
+        <section class="shopping-cart">
+            <h2>Your Shopping Cart</h2>
+            
+            <!-- Shopping Cart Table -->
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Remove from Cart</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows for products, add more as needed -->
+                    <tr>
+                        <td>
+                            <img src="images/Consoles/Original-PlayStation-5.png" alt="ps5" class="cart-product-image">
+                        </td>
+                        <td>PlayStation 5 Console</td>
+                        <td>$499.99</td>
+                        <td>
+                            <input type="number" value="1" min="1" class="quantity-input">
+                        </td>
+                        <td>
+                            <button class="remove-btn">X</button>
+                        </td>
+                        <td>$499.99</td>
+                    </tr>
+                    
+                    
+                    <tr>
+                        <td>
+                            <img src="images/Accesories/DualSense.png" alt="dualsense" class="cart-product-image">
+                        </td>
+                        <td>DualSense Controller</td>
+                        <td>$69.99</td>
+                        <td>
+                            <input type="number" value="2" min="1" class="quantity-input">
+                        </td>
+                        <td>
+                            <button class="remove-btn">X</button>
+                        </td>
+                        <td>$139.98</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="cart-summary">
+                <p><b>Total Items:</b> 3</p>
+                <p><b>Subtotal:</b> $639.97</p>
+                <p><b>Tax (6.75%):</b> $43.19</p>
+                <p><b>Delivery Fee (3%):</b> $19.19</p>
+                <p><b>Total:</b> $702.35</p>
+            </div>
+            
+            <div class="cart-actions">
+                <button class="update-cart">Clear Cart</button>
+                <button class="continue-shopping">Continue Shopping</button>
+                <button class="checkout">Proceed to Checkout</button>
+            </div>
+        </section>
+    </main>
+    
+
+    <footer class="pre-format">
+        Copyright © 2024 PlayStation Nation
+        PlayStation Nation Productions
+        All rights reserved
+    </footer>
+
+</body>
+
+</html>
