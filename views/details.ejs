@@ -20,28 +20,15 @@
 
     <header>
 
-        <nav>
-            <ul class="nav-bar">
-                <li><a href="../Term%20Project/index.html">Home</a></li>
-                <li class="dropdown">
-                    <a href="../Term%20Project/products.html" class="dropbtn">Products</a>
-                    <ul class="dropdown-content">
-                        <li><a href="#">Consoles</a></li>
-                        <li><a href="#">Games</a></li>
-                        <li><a href="#">Accessories</a></li>
-                        <li><a href="#">Decor</a></li>
-                    </ul>
-                </li>
-                <li><a href="cart.html">View Shopping Cart</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Sign In</a></li>
-                <li><a href="#">Sign Up</a></li>
-            </ul>
-        </nav>
+        <%- include('partials/_navbar', { user: user }) %>
 
         <h1><u>PlayStation Nation</u></h1>
 
         <h3>Your journey to greatness starts here.</h3>
+
+        <% if (user) { %>
+            <p>Hello, <%= user.displayName %>!</p>
+        <% } %>        
 
     </header>
 

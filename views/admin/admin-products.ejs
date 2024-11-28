@@ -22,29 +22,13 @@
 
     <header>
 
-        <nav>
-            <ul class="nav-bar">
-                <li><a href="../index.html">Home</a></li>
-                <li class="dropdown">
-                    <a href="../products.html" class="dropbtn">Products</a>
-                    <ul class="dropdown-content">
-                        <li><a href="#">Consoles</a></li>
-                        <li><a href="#">Games</a></li>
-                        <li><a href="#">Accessories</a></li>
-                        <li><a href="#">Decor</a></li>
-                    </ul>
-                </li>
-                <li><a href="admin-upload.html">Admin Upload</a></li>
-                <li><a href="admin-products.html">Admin Products</a></li>
-                <li><a href="../index.html">Sign Out</a></li>
-            </ul>
-        </nav>
-
+        <%- include('../partials/_navbar', { user: user, isAdmin: isAdmin }) %>
+    
         <h1><u>PlayStation Nation</u></h1>
-
+    
         <h3>Your journey to greatness starts here.</h3>
-
-    </header>
+    
+    </header>    
 
     <h1><u>Administrator</u></h1>
 

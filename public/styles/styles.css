@@ -254,3 +254,7 @@ figcaption {
 .remove-btn:hover {
     background-color: darkred; 
 }
+
+.google-signup-button {
+    background-color: lightcyan;
+}
