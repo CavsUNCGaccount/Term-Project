@@ -63,13 +63,16 @@ app.use(express.static('public'));
 // Import routes
 const productRoutes = require('./routes/productRoutes');
 const cartRoutes = require('./routes/cartRoutes');
+const cartProductRoutes = require('./routes/cartProductRoutes');
 const userRoutes = require('./routes/userRoutes'); 
 const authRoutes = require('./routes/authRoutes');
 const sessionConfig = require('./middleware/sessionConfig');
 
 // Use the routes
-app.use('/api/products', productRoutes);
+//app.use('/api/products', productRoutes);
+app.use('/', productRoutes);
 app.use('/api/carts', cartRoutes);
+app.use('/api/cart-products', cartProductRoutes);
 app.use('/api/users', userRoutes);
 app.use('/auth', authRoutes);
 
