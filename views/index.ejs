@@ -8,7 +8,6 @@
 
   This is the home page of my video game store. It contains a splash section,
   a search field, navigation controls, and a footer.
-
 -->
 
 <head>
@@ -21,18 +20,11 @@
 
     <header>
         <!-- Include the Navbar -->
-        <%- include('partials/_navbar', { user: user }) %>
+        <%- include('partials/_navbar') %>
     
         <!-- Greeting the User -->
         <h1>Welcome to PlayStation Nation</h1>
-        <p>Hello, <%= user?.displayName || 'User' %>!</p>
-    
-        <% if (isAdmin) { %>
-            <p>As an admin, you can manage products and upload new products.</p>
-            <a href="/admin/products">Go to Admin Panel</a>
-        <% } else { %>
-            <p>Explore our wide selection of products and enjoy shopping!</p>
-        <% } %>
+ 
     </header>    
 
     <main>
@@ -79,10 +71,6 @@
                 </figure>
 
             </section>
-
-
-            Interested? <a href="#">Sign up for an account today!</a>
-
 
         </section>
 

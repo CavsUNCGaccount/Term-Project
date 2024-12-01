@@ -1,18 +1,28 @@
 const express = require('express');
 const router = express.Router();
 const cartProductModel = require('../models/cartProductModel');
+const cartModel = require('../models/cartModel');
 
-// Get all products in a cart
-// http://localhost:3000/api/cart-products/1 (1 is the cart ID number)
-router.get('/:cartId', (req, res) => {
-    const cartId = req.params.cartId;
+// Get all products in the cart
+// http://localhost:3000/api/cart-products
+router.get('/', (req, res) => {
     try {
-        console.log(`Request to get all products in cart ID: ${cartId}`);
-        const cartProducts = cartProductModel.getCartProductsByCartId(cartId);
+        console.log(`Request to get all products in the active cart`);
+
+        // Get the active cart
+        const cart = cartModel.getActiveCart();
+
+        if (!cart) {
+            console.log(`No active cart found`);
+            return res.status(404).json({ error: 'No active cart found' });
+        }
+
+        // Get all products in the active cart
+        const cartProducts = cartProductModel.getCartProductsByCartId(cart.Id);
         if (cartProducts && cartProducts.length > 0) {
             res.status(200).json(cartProducts);
         } else {
-            console.log(`No products found in cart with ID: ${cartId}`);
+            console.log(`No products found in the cart with ID: ${cart.Id}`);
             res.status(404).json({ error: 'No products found in the cart' });
         }
     } catch (err) {
@@ -21,46 +31,48 @@ router.get('/:cartId', (req, res) => {
     }
 });
 
-// Add a product to a cart
-// http://localhost:3000/api/cart-products
-router.post('/', (req, res) => {
-    const { cart_id, product_id, quantity } = req.body;
-    try {
-        console.log('Request to add a product to cart:', req.body);
-        const cartProduct = { cart_id, product_id, quantity };
-        const result = cartProductModel.addCartProduct(cartProduct);
-        res.status(201).json({ message: 'Product added to cart successfully', cartProductId: result.lastInsertRowid });
-    } catch (err) {
-        console.error('Error adding product to cart:', err);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-});
+// Add a product to the cart
+router.post('/', async (req, res) => {
+    const { product_id, quantity } = req.body;
 
-/**
- * Update product quantity in a cart
- * Endpoint to update the quantity of a specific product in a cart, 
- * identified by the cart-product ID (e.g., 1 refers to the cart-product with ID 1)
- * http://localhost:3000/api/cart-products/1
- */  
-router.put('/:id', (req, res) => {
-    const cartProductId = req.params.id;
-    const { quantity } = req.body;
     try {
-        console.log(`Request to update product quantity in cart-product ID: ${cartProductId}`, req.body);
-        const result = cartProductModel.updateCartProductQuantity(cartProductId, quantity);
-        if (result.changes > 0) {
-            res.status(200).json({ message: 'Cart product updated successfully' });
-        } else {
-            console.log(`Cart product with ID ${cartProductId} not found`);
-            res.status(404).json({ error: 'Cart product not found' });
+        console.log(`Adding product to the cart with product ID: ${product_id}, quantity: ${quantity}`);
+
+        // Get or create an active cart
+        let cart = await cartModel.getActiveCart();
+
+        if (!cart) {
+            const newCart = {
+                status: 'new',
+                date_created: new Date().toISOString()
+            };
+            const createCartResult = await cartModel.createCart(newCart);
+
+            if (createCartResult.changes > 0) {
+                cart = await cartModel.getActiveCart(); // Fetch the newly created cart
+            } else {
+                return res.status(500).json({ error: 'Failed to create a new cart' });
+            }
         }
-    } catch (err) {
-        console.error('Error updating cart product:', err);
+
+        console.log('Cart after creation or retrieval:', cart);
+
+        // Add product to the active cart
+        const cartProduct = {
+            cart_id: cart.Id,
+            product_id,
+            quantity
+        };
+        await cartProductModel.addCartProduct(cartProduct);
+
+        res.status(201).json({ message: 'Product added to cart successfully' });
+    } catch (error) {
+        console.error('Error adding product to cart:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
 
-// Delete a product from a cart
+// Delete a product from the cart
 // http://localhost:3000/api/cart-products/1 (1 is the cart product ID)
 router.delete('/:id', (req, res) => {
     const cartProductId = req.params.id;

@@ -8,7 +8,6 @@
 
   This is my admin-upload page. it will let the admin select a file with bulk product data in JSON format to upload
   to the database.
-
 -->
 
 <head>
@@ -20,13 +19,12 @@
 <body>
 
     <header>
-
-        <%- include('../partials/_navbar', { user: user, isAdmin: isAdmin }) %>
+        <!-- Include the Navbar -->
+        <%- include('../partials/_navbar') %>
     
         <h1><u>PlayStation Nation</u></h1>
     
         <h3>Your journey to greatness starts here.</h3>
-    
     </header>    
 
     <h1><u>Administrator</u></h1>
@@ -44,7 +42,7 @@
         "product_id": "101",
         "name": "Original PlayStation 5",
         "description": "Welcome to the next generation of video game consoles. With an ultra fast SSD that gives it incredibly fast loading times, the PS5 is a piece of hardware all PlayStation enthusiasts must own.",
-        "category id": "Consoles",
+        "category_id": "Consoles",
         "price": 499.99,
         "stock": 50
     },
@@ -52,15 +50,14 @@
         "product_id": "301",
         "name": "DualSense Controller",
         "description": "Elevate your gaming with the DualSense Wireless Controller, featuring advanced haptic feedback and adaptive triggers for immersive experiences.",  
-        "category id": "Accessories",
+        "category_id": "Accessories",
         "price": 69.99,
         "stock": 200
     }
 ]
-            
             </code></pre>
 
-            <form action="#" method="POST" enctype="multipart/form-data">
+            <form action="/api/products/upload" method="POST" enctype="multipart/form-data">
                 <label for="file-upload">Choose a JSON file:</label>
                 <input type="file" id="file-upload" name="file-upload" accept=".json">
                 <br><br>

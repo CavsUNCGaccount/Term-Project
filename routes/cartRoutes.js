@@ -2,84 +2,97 @@ const express = require('express');
 const router = express.Router();
 const cartModel = require('../models/cartModel');
 
-// Create a new cart for a user
-// http://localhost:3000/api/carts
-router.post('/', (req, res) => {
-    const { user_id, status } = req.body;
+// Get the single active cart
+// GET http://localhost:3000/api/cart
+router.get('/', async (req, res) => {
+    console.log('GET /api/cart - Fetching the active cart');
     try {
-        console.log('Request to create a new cart:', req.body);
-        const cart = {
-            user_id,
-            status
-        };
-        const result = cartModel.createCart(cart);
-        res.status(201).json({ message: 'Cart created successfully', cartId: result.lastInsertRowid });
-    } catch (err) {
-        console.error('Error creating cart:', err);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-});
-
-// Get all carts for a user
-// http://localhost:3000/api/carts/1 (1 is the user ID number)
-router.get('/:userId', (req, res) => {
-    const userId = req.params.userId;
-    try {
-        console.log(`Request to get all carts for user ID: ${userId}`);
-        const carts = cartModel.getCartsByUserId(userId);
-        if (carts && carts.length > 0) {
-            res.status(200).json(carts);
+        const cart = await cartModel.getActiveCart();
+        if (cart) {
+            console.log('Cart fetched:', cart);
+            res.status(200).json(cart);
         } else {
-            res.status(404).json({ error: 'No carts found for the user' });
+            console.log('No active cart found');
+            res.status(404).json({ error: 'No active cart found' });
         }
     } catch (err) {
-        console.error('Error retrieving carts:', err);
+        console.error('Error fetching the cart:', err);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
 
-// Update a cart by ID
-// http://localhost:3000/api/carts/3 (3 is the cart ID number)
-router.put('/:id', (req, res) => {
-    const cartId = req.params.id;
+// Create or get the single active cart
+// POST http://localhost:3000/api/cart
+router.post('/', async (req, res) => {
+    console.log('POST /api/cart - Creating or fetching the active cart');
+    try {
+        let cart = await cartModel.getActiveCart();
+        if (!cart) {
+            const newCart = {
+                status: 'new',
+                date_created: new Date().toISOString()
+            };
+            const result = await cartModel.createCart(newCart);
+            cart = await cartModel.getActiveCart();
+            console.log('New cart created:', cart);
+        } else {
+            console.log('Cart already exists:', cart);
+        }
+        res.status(200).json(cart);
+    } catch (err) {
+        console.error('Error creating/fetching the cart:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Update the cart status (e.g., to 'purchased')
+// PUT http://localhost:3000/api/cart
+router.put('/', async (req, res) => {
+    console.log('PUT /api/cart - Updating cart status');
     const { status } = req.body;
-
-    console.log(`Request to update cart with ID: ${cartId}`, req.body);  // Log incoming request
-
     try {
-        const cart = { status };
-        console.log('Cart to be updated:', cart); // Log the cart object before updating
-
-        // Call the model function to update the cart
-        const result = cartModel.updateCart(cartId, cart);
-
-        if (result.changes > 0) {
-            console.log(`Cart with ID ${cartId} updated successfully`);
-            res.status(200).json({ message: 'Cart updated successfully' });
+        let cart = await cartModel.getActiveCart();
+        if (cart) {
+            const updatedCart = { status };
+            const result = await cartModel.updateCart(cart.Id, updatedCart);
+            if (result.changes > 0) {
+                console.log('Cart updated successfully');
+                res.status(200).json({ message: 'Cart updated successfully' });
+            } else {
+                console.log('Failed to update the cart');
+                res.status(500).json({ error: 'Failed to update the cart' });
+            }
         } else {
-            console.log(`Cart with ID ${cartId} not found`);  // Log if cart not found
-            res.status(404).json({ error: 'Cart not found' });
+            console.log('No active cart found');
+            res.status(404).json({ error: 'No active cart found' });
         }
     } catch (err) {
-        console.error('Error updating cart:', err);
+        console.error('Error updating the cart:', err);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
 
-// Delete a cart by ID
-// http://localhost:3000/api/carts/1 (1 is the cart ID number)
-router.delete('/:cartId', (req, res) => {
-    const cartId = req.params.cartId;
+// Delete the cart (if needed for reset purposes)
+// DELETE http://localhost:3000/api/cart
+router.delete('/', async (req, res) => {
+    console.log('DELETE /api/cart - Deleting the active cart');
     try {
-        console.log(`Request to delete cart with ID: ${cartId}`);
-        const result = cartModel.deleteCart(cartId);
-        if (result.changes > 0) {
-            res.status(200).json({ message: 'Cart deleted successfully' });
+        const cart = await cartModel.getActiveCart();
+        if (cart) {
+            const result = await cartModel.deleteCart(cart.Id);
+            if (result.changes > 0) {
+                console.log('Cart deleted successfully');
+                res.status(200).json({ message: 'Cart deleted successfully' });
+            } else {
+                console.log('Failed to delete the cart');
+                res.status(500).json({ error: 'Failed to delete the cart' });
+            }
         } else {
-            res.status(404).json({ error: 'Cart not found' });
+            console.log('No active cart found to delete');
+            res.status(404).json({ error: 'No active cart found' });
         }
     } catch (err) {
-        console.error('Error deleting cart:', err);
+        console.error('Error deleting the cart:', err);
         res.status(500).json({ error: 'Internal server error' });
     }
 });

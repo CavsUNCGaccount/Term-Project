@@ -1,7 +1,7 @@
 document.querySelectorAll('.add-to-cart').forEach(button => {
     button.addEventListener('click', () => {
+        console.log('Add to Cart button clicked'); 
         const productId = button.getAttribute('data-id');
-
         fetch('/api/cart-products', {
             method: 'POST',
             headers: {

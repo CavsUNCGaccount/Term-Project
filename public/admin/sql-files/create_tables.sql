@@ -1,12 +1,3 @@
-CREATE TABLE Users (
-    Id INTEGER PRIMARY KEY AUTOINCREMENT,
-    Date_Created TEXT NOT NULL,
-    Name TEXT NOT NULL,
-    Email TEXT NOT NULL UNIQUE,
-    Password TEXT NOT NULL,
-    User_Role TEXT NOT NULL CHECK(User_Role IN ('Admin', 'Shopper'))
-);
-
 CREATE TABLE Categories (
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
     Name TEXT NOT NULL UNIQUE,
@@ -27,10 +18,8 @@ CREATE TABLE Products (
 
 CREATE TABLE Carts (
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
-    Status TEXT NOT NULL CHECK(Status IN ('new', 'abandoned', 'purchased')),
-    Date_Created TEXT NOT NULL,
-    User_Id INTEGER NOT NULL,
-    FOREIGN KEY (User_Id) REFERENCES Users(Id)
+    Status TEXT NOT NULL CHECK(Status IN ('new', 'purchased')),
+    Date_Created TEXT NOT NULL
 );
 
 CREATE TABLE CartProducts (

@@ -2,34 +2,31 @@
 
 <html lang="en">
     <!--
-  Name: Carlos Villarreal
-  Date: 09.13.2024
-  CSC 372-01
+    Name: Carlos Villarreal
+    Date: 09.13.2024
+    CSC 372-01
 
-  This is the products page of my video game store. It contains the list of products available from the 4 different categories
-  which are consoles, games, accesories and decor.
--->
+    This is the products page of my video game store. It contains the list of products available from the 4 different categories
+    which are consoles, games, accessories, and decor.
+    -->
 
     <head>
         <meta charset="utf-8">
         <title>PlayStation Nation - Products</title>
         <link rel="stylesheet" href="styles/styles.css">
-        <script src="/public/js/products.js"></script>
+        <script src="/js/products.js" defer></script>
     </head>
 
     <body>
 
         <header>
 
-            <%- include('partials/_navbar', { user: user }) %>
+            <!-- Include the Navbar -->
+            <%- include('partials/_navbar') %>
 
             <h1><u>PlayStation Nation</u></h1>
 
             <h3>Your journey to greatness starts here.</h3>
-
-            <% if (user) { %>
-                <p>Hello, <%= user.displayName %>!</p>
-            <% } %>              
 
         </header>
 
@@ -39,15 +36,15 @@
             <div class="products-container">
                 <% if (products && products.length > 0) { %>
                     <% products.forEach(function(product) { %>
-                      <div class="product-card">
-                        <img src="<%= product.Image_Url %>" alt="<%= product.Name %>">
-                        <h3><%= product.Name %></h3>
-                        <p>Price: $<%= product.Price %></p>
-                        <p>Stock: <%= product.Stock %></p>
-                        <button class="add-to-cart-button" data-product-id="<%= product.Id %>">Add to Cart</button>
-                      </div>
+                        <div class="product-card">
+                            <img src="<%= product.Image_Url %>" alt="<%= product.Name %>">
+                            <h3><%= product.Name %></h3>
+                            <p>Price: $<%= product.Price %></p>
+                            <p>Stock: <%= product.Stock %></p>
+                            <button class="add-to-cart" data-id="<%= product.Id %>">Add to Cart</button>
+                        </div>
                     <% }); %>
-                  <% } else { %>
+                <% } else { %>
                     <p>No products available at the moment.</p>
                 <% } %>
             </div>

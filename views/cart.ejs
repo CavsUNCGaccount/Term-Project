@@ -14,29 +14,26 @@
     <meta charset="utf-8">
     <title>PlayStation Nation - Shopping Cart</title>
     <link rel="stylesheet" href="styles/styles.css">
+    <script src="/js/cart.js" defer></script>
 </head>
 
 <body>
 
     <header>
 
-        <%- include('partials/_navbar', { user: user }) %>
+        <!-- Include the Navbar -->
+        <%- include('partials/_navbar') %>
 
         <h1><u>PlayStation Nation</u></h1>
 
         <h3>Your journey to greatness starts here.</h3>
-
-        <% if (user) { %>
-            <p>Hello, <%= user.displayName %>!</p>
-        <% } %>
-          
 
     </header>
 
     <main>
         <section class="shopping-cart">
             <h2>Your Shopping Cart</h2>
-            
+
             <!-- Shopping Cart Table -->
             <table class="cart-table">
                 <thead>
@@ -50,56 +47,53 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Rows for products, add more as needed -->
-                    <tr>
-                        <td>
-                            <img src="images/Consoles/Original-PlayStation-5.png" alt="ps5" class="cart-product-image">
-                        </td>
-                        <td>PlayStation 5 Console</td>
-                        <td>$499.99</td>
-                        <td>
-                            <input type="number" value="1" min="1" class="quantity-input">
-                        </td>
-                        <td>
-                            <button class="remove-btn">X</button>
-                        </td>
-                        <td>$499.99</td>
-                    </tr>
-                    
-                    
-                    <tr>
-                        <td>
-                            <img src="images/Accesories/DualSense.png" alt="dualsense" class="cart-product-image">
-                        </td>
-                        <td>DualSense Controller</td>
-                        <td>$69.99</td>
-                        <td>
-                            <input type="number" value="2" min="1" class="quantity-input">
-                        </td>
-                        <td>
-                            <button class="remove-btn">X</button>
-                        </td>
-                        <td>$139.98</td>
-                    </tr>
+                    <% if (cartProducts && cartProducts.length > 0) { %>
+                        <% cartProducts.forEach(function(product) { %>
+                            <tr>
+                                <td>
+                                    <img src="<%= product.Image_Url %>" alt="<%= product.Name %>" class="cart-product-image">
+                                </td>
+                                <td><%= product.Name %></td>
+                                <td>$<%= product.Price.toFixed(2) %></td>
+                                <td>
+                                    <form action="/api/cart-products/<%= product.Id %>?_method=PUT" method="POST">
+                                        <input type="number" name="quantity" value="<%= product.Quantity %>" min="1" class="quantity-input">
+                                        <button type="submit">Update</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="/api/cart-products/<%= product.Id %>?_method=DELETE" method="POST">
+                                        <button type="submit" class="remove-btn">X</button>
+                                    </form>
+                                </td>
+                                <td>$<%= (product.Price * product.Quantity).toFixed(2) %></td>
+                            </tr>
+                        <% }) %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="6">Your cart is empty.</td>
+                        </tr>
+                    <% } %>
                 </tbody>
             </table>
-            
+
             <div class="cart-summary">
-                <p><b>Total Items:</b> 3</p>
-                <p><b>Subtotal:</b> $639.97</p>
-                <p><b>Tax (6.75%):</b> $43.19</p>
-                <p><b>Delivery Fee (3%):</b> $19.19</p>
-                <p><b>Total:</b> $702.35</p>
+                <p><b>Total Items:</b> <%= cartSummary.totalItems %></p>
+                <p><b>Subtotal:</b> $<%= cartSummary.subtotal.toFixed(2) %></p>
+                <p><b>Tax (6.75%):</b> $<%= cartSummary.tax.toFixed(2) %></p>
+                <p><b>Delivery Fee (3%):</b> $<%= cartSummary.deliveryFee.toFixed(2) %></p>
+                <p><b>Total:</b> $<%= cartSummary.total.toFixed(2) %></p>
             </div>
-            
+
             <div class="cart-actions">
-                <button class="update-cart">Clear Cart</button>
-                <button class="continue-shopping">Continue Shopping</button>
-                <button class="checkout">Proceed to Checkout</button>
+                <form action="/api/cart-products?_method=DELETE" method="POST">
+                    <button class="update-cart">Clear Cart</button>
+                </form>
+                <a href="/products" class="continue-shopping">Continue Shopping</a>
+                <a href="/checkout" class="checkout">Proceed to Checkout</a>
             </div>
         </section>
     </main>
-    
 
     <footer class="pre-format">
         Copyright © 2024 PlayStation Nation

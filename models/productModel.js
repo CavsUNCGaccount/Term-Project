@@ -1,69 +1,69 @@
 const db = require('../db');
 
 // Function to get all products
-const getAllProducts = () => {
-    try {
-        const statement = db.prepare('SELECT * FROM Products');
-        const products = statement.all();
-        return products; // This should be an array of products
-    } catch (err) {
-        console.error('Error fetching products:', err);
-        throw err;
-    }
-};
-
-// Function to get product by ID
-function getProductById(productId) {
-    const statement = db.prepare('SELECT * FROM Products WHERE Id = ?');
-    return statement.get(productId);
+function getAllProducts() {
+    const statement = db.prepare(`
+        SELECT * FROM Products
+    `);
+    return statement.all();
 }
 
-// Function to add a new product
-function addProduct(product) {
+// Function to get a single product by ID
+async function getProductById(productId) {
     const statement = db.prepare(`
-        INSERT INTO Products (Name, Description, Image_url, Price, Stock, Category_Id, Featured_Status)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        SELECT * FROM Products
+        WHERE Id = ?
+    `);
+    return statement.get(productId); // Use `.get` to return a single product
+}
+
+// Function to create a new product
+function createProduct(product) {
+    const statement = db.prepare(`
+        INSERT INTO Products (Name, Description, Category_Id, Price, Stock, Image_Url)
+        VALUES (?, ?, ?, ?, ?, ?)
     `);
     return statement.run(
         product.name,
         product.description,
-        product.image_url,
+        product.category_id,
         product.price,
         product.stock,
-        product.category_id,
-        product.featured_status
+        product.image_url
     );
 }
 
-// Function to update a product
+// Function to update an existing product by ID
 function updateProduct(productId, product) {
     const statement = db.prepare(`
         UPDATE Products
-        SET Name = ?, Description = ?, Image_url = ?, Price = ?, Stock = ?, Category_Id = ?, Featured_Status = ?
+        SET Name = ?, Description = ?, Category_Id = ?, Price = ?, Stock = ?, Image_Url = ?
         WHERE Id = ?
     `);
     return statement.run(
         product.name,
         product.description,
-        product.image_url,
+        product.category_id,
         product.price,
         product.stock,
-        product.category_id,
-        product.featured_status,
+        product.image_url,
         productId
     );
 }
 
-// Function to delete a product
+// Function to delete a product by ID
 function deleteProduct(productId) {
-    const statement = db.prepare('DELETE FROM Products WHERE Id = ?');
+    const statement = db.prepare(`
+        DELETE FROM Products
+        WHERE Id = ?
+    `);
     return statement.run(productId);
 }
 
 module.exports = {
     getAllProducts,
-    getProductById,
-    addProduct,
+    createProduct,
     updateProduct,
     deleteProduct,
+    getProductById
 };
