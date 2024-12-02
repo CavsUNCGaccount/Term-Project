@@ -41,7 +41,7 @@
                         <th>Product</th>
                         <th>Name</th>
                         <th>Price</th>
-                        <th>Quantity</th>
+                        <!--<th>Quantity</th> -->
                         <th>Remove from Cart</th>
                         <th>Total</th>
                     </tr>
@@ -54,17 +54,17 @@
                                     <img src="<%= product.Image_Url %>" alt="<%= product.Name %>" class="cart-product-image">
                                 </td>
                                 <td><%= product.Name %></td>
-                                <td>$<%= product.Price.toFixed(2) %></td>
-                                <td>
+                                <td>$<%= product.Price %></td>
+                                <!-- <td>
                                     <form action="/api/cart-products/<%= product.Id %>?_method=PUT" method="POST">
                                         <input type="number" name="quantity" value="<%= product.Quantity %>" min="1" class="quantity-input">
                                         <button type="submit">Update</button>
-                                    </form>
-                                </td>
+                                    </form>  
+                                </td>  Come back to this after the semester ends. -->
                                 <td>
                                     <form action="/api/cart-products/<%= product.Id %>?_method=DELETE" method="POST">
-                                        <button type="submit" class="remove-btn">X</button>
-                                    </form>
+                                        <button class="remove-btn" data-id="<%= product.Id %>">X</button>
+                                    </form>                                    
                                 </td>
                                 <td>$<%= (product.Price * product.Quantity).toFixed(2) %></td>
                             </tr>
@@ -86,9 +86,9 @@
             </div>
 
             <div class="cart-actions">
-                <form action="/api/cart-products?_method=DELETE" method="POST">
-                    <button class="update-cart">Clear Cart</button>
-                </form>
+                <!--  <form action="/api/cart-products?_method=DELETE" method="POST">
+                   <button class="update-cart">Clear Cart</button> 
+                </form> Come back to this after the semester ends --> 
                 <a href="/products" class="continue-shopping">Continue Shopping</a>
                 <a href="/checkout" class="checkout">Proceed to Checkout</a>
             </div>

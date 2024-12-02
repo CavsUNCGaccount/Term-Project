@@ -81,6 +81,12 @@ router.post('/', async (req, res) => {
 // DELETE http://localhost:3000/api/cart-products/id (id is the cart product ID number)
 router.delete('/:id', (req, res) => {
     const cartProductId = req.params.id;
+
+
+    if (!cartProductId) {
+        return res.status(400).json({ error: 'Invalid Cart Product ID' });
+    }
+
     try {
         console.log(`Request to delete product from cart with cart-product ID: ${cartProductId}`);
         const result = cartProductModel.deleteCartProduct(cartProductId);

@@ -6,6 +6,7 @@ const path = require('path');
 
 // Import models
 const cartModel = require('./models/cartModel');
+const productModel = require('./models/productModel');
 const cartProductModel = require('./models/cartProductModel'); // Assuming you have this model
 
 // Custom middleware to parse JSON for non-GET requests
@@ -44,42 +45,106 @@ app.get('/test', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.render('index', { user: null, isAdmin: false });
+  res.render('index');
 });
 
-app.get('/products', (req, res) => {
-  res.render('products', { user: null, isAdmin: false });
+app.get('/products', async (req, res) => {
+  try {
+    
+    const products = await productModel.getAllProducts();
+    res.render('products', { products });
+  } catch (err) {
+    console.error('Error fetching products:', err);
+    res.status(500).send('Internal server error');
+  }
 });
 
 app.get('/cart', async (req, res) => {
   try {
-    // We will use a hardcoded cart for the simplified version
-    const cart = await cartModel.getCartByUserId(1); // Assuming a single user/cart
-    let cartProducts = [];
-    let cartSummary = {
+    const cart = await cartModel.getActiveCart();
+
+    if (!cart) {
+      return res.render('cart', { cartProducts: [], cartSummary: getEmptyCartSummary() });
+    }
+
+    const cartProducts = await cartProductModel.getCartProductsByCartId(cart.Id);
+
+    // Log data for debugging purposes
+    console.log('Cart Products:', cartProducts);
+
+    const cartSummary = calculateCartSummary(cartProducts);
+    
+    console.log('Cart Summary:', cartSummary);
+
+    res.render('cart', { cartProducts, cartSummary });
+  } catch (err) {
+    console.error('Error fetching cart data:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Utility function to return an empty cart summary
+function getEmptyCartSummary() {
+  return {
+    totalItems: 0,
+    subtotal: 0,
+    tax: 0,
+    deliveryFee: 0,
+    total: 0
+  };
+}
+
+// Function to calculate cart summary based on products
+function calculateCartSummary(cartProducts) {
+  let totalItems = 0;
+  let subtotal = 0;
+
+  cartProducts.forEach(product => {
+    console.log(`Product ID: ${product.Product_Id}, Price: ${product.Price}, Quantity: ${product.Quantity}`);
+    if (product.Price && product.Quantity) {
+      totalItems += product.Quantity;
+      subtotal += product.Price * product.Quantity;
+    } else {
+      console.error(`Missing price or quantity for product ID: ${product.Product_Id}`);
+    }
+  });
+
+  const tax = subtotal * 0.0675; // Example: 6.75%
+  const deliveryFee = subtotal * 0.03; // Example: 3% delivery fee
+  const total = subtotal + tax + deliveryFee;
+
+  return {
+    totalItems,
+    subtotal,
+    tax,
+    deliveryFee,
+    total
+  };
+}
+
+app.get('/checkout', (req, res) => {
+  console.log("Checkout route reached");
+
+  // Placeholder cart summary
+  const cartSummary = {
       totalItems: 0,
       subtotal: 0,
       tax: 0,
       deliveryFee: 0,
-      total: 0
-    };
+      total: 0,
+  };
 
-    if (cart) {
-      cartProducts = await cartProductModel.getCartProductsByCartId(cart.Id);
+  console.log("Cart summary generated:", cartSummary);
 
-      // Calculate the summary for the cart
-      cartSummary.totalItems = cartProducts.reduce((total, product) => total + product.Quantity, 0);
-      cartSummary.subtotal = cartProducts.reduce((total, product) => total + product.Price * product.Quantity, 0);
-      cartSummary.tax = cartSummary.subtotal * 0.0675; // Tax rate of 6.75%
-      cartSummary.deliveryFee = cartSummary.subtotal * 0.03; // Delivery fee of 3%
-      cartSummary.total = cartSummary.subtotal + cartSummary.tax + cartSummary.deliveryFee;
-    }
-
-    res.render('cart', { user: null, isAdmin: false, cartProducts, cartSummary });
-  } catch (err) {
-    console.error('Error fetching cart data:', err);
-    res.status(500).send('Internal Server Error');
-  }
+  // Render the checkout page with placeholder data
+  res.render('checkout', { cartSummary }, (err, html) => {
+      if (err) {
+          console.error("Error rendering checkout page:", err);
+          return res.status(500).send("Error rendering checkout page");
+      } else {
+          res.send(html);
+      }
+  });
 });
 
 /**

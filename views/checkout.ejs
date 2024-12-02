@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+  Name: Carlos Villarreal
+  Date: 12.02.2024
+  CSC 372-01
+
+  This is the checkout page placeholder for my video game store. 
+-->
+
+<head>
+    <meta charset="utf-8">
+    <title>PlayStation Nation - Checkout</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+
+<body>
+
+    <header>
+
+        <!-- Include the Navbar -->
+        <%- include('partials/_navbar') %>
+
+        <h1><u>PlayStation Nation</u></h1>
+
+        <h3>Your journey to greatness ends here.</h3>
+
+    </header>
+
+    <main>
+        <section class="checkout-summary">
+            <h2>Order Summary</h2>
+            <p><b>Total Items:</b> 5</p>
+            <p><b>Subtotal:</b> $1499.95</p>
+            <p><b>Tax (6.75%):</b> $101.24</p>
+            <p><b>Delivery Fee (3%):</b> $45.00</p>
+            <p><b>Total:</b> $1646.19</p>
+        </section>
+
+        <section class="checkout-form">
+            <h2>Payment Details</h2>
+            <form>
+                <label for="card-number">Card Number:</label>
+                <input type="text" id="card-number" name="card-number" required><br><br>
+
+                <label for="expiration-date">Expiration Date:</label>
+                <input type="text" id="expiration-date" name="expiration-date" required><br><br>
+
+                <label for="cvc">CVC:</label>
+                <input type="text" id="cvc" name="cvc" required><br><br>
+
+                <button type="button" onclick="alert('Checkout completed successfully!')">Submit Payment</button>
+            </form>
+        </section>
+
+        <section class="cart-actions">
+            <a href="/products" class="continue-shopping">Continue Shopping</a>
+        </section>
+    </main>
+
+    <footer class="pre-format">
+        Copyright © 2024 PlayStation Nation
+        PlayStation Nation Productions
+        All rights reserved
+    </footer>
+
+</body>
+
+</html>

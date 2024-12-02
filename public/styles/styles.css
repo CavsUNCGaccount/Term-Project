@@ -224,7 +224,7 @@ figcaption {
     margin-top: 20px;
 }
 
-.cart-actions button, .add-to-cart {
+.cart-actions button, .add-to-cart, .continue-shopping, .checkout {
     padding: 10px 20px;
     font-size: 1em;
     border: none;

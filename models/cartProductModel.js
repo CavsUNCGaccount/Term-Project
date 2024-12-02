@@ -3,8 +3,10 @@ const db = require('../db');
 // Function to get all products in the general cart by cart ID
 function getCartProductsByCartId(cartId) {
     const statement = db.prepare(`
-        SELECT * FROM CartProducts
-        WHERE Cart_Id = ?
+        SELECT cp.*, p.Name, p.Price, p.Image_Url 
+        FROM CartProducts cp 
+        JOIN Products p ON cp.Product_Id = p.Id 
+        WHERE cp.Cart_Id = ?
     `);
     return statement.all(cartId);
 }
