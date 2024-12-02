@@ -4,13 +4,15 @@ const cartProductModel = require('../models/cartProductModel');
 const cartModel = require('../models/cartModel');
 
 // Get all products in the cart
-// http://localhost:3000/api/cart-products
-router.get('/', (req, res) => {
+// GET http://localhost:3000/api/cart-products
+router.get('/', async (req, res) => {
     try {
         console.log(`Request to get all products in the active cart`);
 
         // Get the active cart
-        const cart = cartModel.getActiveCart();
+        const cart = await cartModel.getActiveCart();
+        console.log('Retrieved cart:', cart);
+        console.log('Retreived cart Id: ', cart?.Id);     
 
         if (!cart) {
             console.log(`No active cart found`);
@@ -19,6 +21,7 @@ router.get('/', (req, res) => {
 
         // Get all products in the active cart
         const cartProducts = cartProductModel.getCartProductsByCartId(cart.Id);
+   
         if (cartProducts && cartProducts.length > 0) {
             res.status(200).json(cartProducts);
         } else {
@@ -32,6 +35,7 @@ router.get('/', (req, res) => {
 });
 
 // Add a product to the cart
+// POST http://localhost:3000/api/cart-products
 router.post('/', async (req, res) => {
     const { product_id, quantity } = req.body;
 
@@ -40,6 +44,7 @@ router.post('/', async (req, res) => {
 
         // Get or create an active cart
         let cart = await cartModel.getActiveCart();
+
 
         if (!cart) {
             const newCart = {
@@ -73,7 +78,7 @@ router.post('/', async (req, res) => {
 });
 
 // Delete a product from the cart
-// http://localhost:3000/api/cart-products/1 (1 is the cart product ID)
+// DELETE http://localhost:3000/api/cart-products/id (id is the cart product ID number)
 router.delete('/:id', (req, res) => {
     const cartProductId = req.params.id;
     try {
