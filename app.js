@@ -147,6 +147,10 @@ app.get('/checkout', (req, res) => {
   });
 });
 
+app.get('/admin/upload', (req, res) => {
+  res.render('admin/admin-upload');
+});
+
 /**
  * Start the server
  * Server will run on http://localhost:3000

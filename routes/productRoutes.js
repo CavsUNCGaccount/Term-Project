@@ -1,6 +1,11 @@
 const express = require('express');
+const multer = require('multer');
+const fs = require('fs');
 const router = express.Router();
 const productModel = require('../models/productModel');
+
+// Configure multer for file upload
+const upload = multer({ dest: 'uploads/' });
 
 // Get all products
 // GET http://localhost:3000/api/products
@@ -118,6 +123,70 @@ router.delete('/:id', async (req, res) => {
         console.error('Error deleting product:', err);
         res.status(500).json({ error: 'Internal server error' });
     }
+});
+
+// Bulk upload products from JSON file
+// POST http://localhost:3000/api/products/bulk-upload
+router.post('/bulk-upload', upload.single('file'), (req, res) => {
+    const filePath = req.file.path;
+
+    // Read the uploaded JSON file
+    fs.readFile(filePath, 'utf8', async (err, data) => {
+        if (err) {
+            console.error('Error reading JSON file:', err);
+            return res.status(500).json({ error: 'Error reading file' });
+        }
+
+        try {
+            const products = JSON.parse(data);
+
+            if (!Array.isArray(products)) {
+                return res.status(400).json({ error: 'Invalid input format. Expected an array of products.' });
+            }
+
+            // Loop through each product and validate fields
+            for (const product of products) {
+                // Validation to ensure all required fields are provided
+                if (
+                    !product.name ||
+                    !product.description ||
+                    !product.image_url ||
+                    typeof product.price !== 'number' ||
+                    typeof product.stock !== 'number' ||
+                    typeof product.category_id !== 'number' ||
+                    typeof product.featured_status !== 'boolean'
+                ) {
+                    return res.status(400).json({ error: 'Invalid product data. Ensure all required fields are provided and of correct type.' });
+                }
+
+                // Create new product object for insertion
+                const newProduct = {
+                    name: product.name,
+                    description: product.description,
+                    image_url: product.image_url,
+                    price: product.price,
+                    stock: product.stock,
+                    category_id: product.category_id,
+                    featured_status: product.featured_status
+                };
+
+                console.log('Creating product:', newProduct);
+                await productModel.createProduct(newProduct);
+            }
+
+            res.status(201).json({ message: `${products.length} products have been successfully added to the database.` });
+        } catch (parseErr) {
+            console.error('Error parsing JSON:', parseErr);
+            res.status(400).json({ error: 'Invalid JSON format' });
+        } finally {
+            // Clean up the uploaded JSON file
+            fs.unlink(filePath, (unlinkErr) => {
+                if (unlinkErr) {
+                    console.error('Error while deleting the JSON file:', unlinkErr);
+                }
+            });
+        }
+    });
 });
 
 module.exports = router;

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <!--
   Name: Carlos Villarreal
@@ -39,27 +38,29 @@
             <pre><code>
 [
     {
-        "product_id": "101",
         "name": "Original PlayStation 5",
-        "description": "Welcome to the next generation of video game consoles. With an ultra fast SSD that gives it incredibly fast loading times, the PS5 is a piece of hardware all PlayStation enthusiasts must own.",
-        "category_id": "Consoles",
+        "description": "The original PlayStation 5 console with ultra-fast SSD, providing incredibly fast load times.",
+        "image_url": "images/Consoles/Original-PlayStation-5.png",
         "price": 499.99,
-        "stock": 50
+        "stock": 50,
+        "category_id": 1,
+        "featured_status": false
     },
     {
-        "product_id": "301",
         "name": "DualSense Controller",
-        "description": "Elevate your gaming with the DualSense Wireless Controller, featuring advanced haptic feedback and adaptive triggers for immersive experiences.",  
-        "category_id": "Accessories",
+        "description": "The DualSense Wireless Controller, featuring advanced haptic feedback and adaptive triggers.",
+        "image_url": "images/Accessories/DualSense.png",
         "price": 69.99,
-        "stock": 200
+        "stock": 200,
+        "category_id": 3,
+        "featured_status": true
     }
 ]
             </code></pre>
 
-            <form action="/api/products/upload" method="POST" enctype="multipart/form-data">
+            <form action="/api/products/bulk-upload" method="POST" enctype="multipart/form-data">
                 <label for="file-upload">Choose a JSON file:</label>
-                <input type="file" id="file-upload" name="file-upload" accept=".json">
+                <input type="file" id="file-upload" name="file" accept=".json" required>
                 <br><br>
                 <button type="submit">Upload File</button>
             </form>

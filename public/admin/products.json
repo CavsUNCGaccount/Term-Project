@@ -1,0 +1,155 @@
+[
+    {
+        "name": "Original PlayStation 5",
+        "description": "The original PlayStation 5 console with ultra-fast SSD, providing incredibly fast load times.",
+        "image_url": "images/Consoles/Original-PlayStation-5.png",
+        "price": 499.99,
+        "stock": 50,
+        "category_id": 1,
+        "featured_status": false
+    },
+    {
+        "name": "PlayStation 5 Digital Edition (Original)",
+        "description": "The digital edition of the original PlayStation 5, featuring the same great power without a disc drive.",
+        "image_url": "images/Consoles/PlayStation-5-Digital-Edition.png",
+        "price": 399.99,
+        "stock": 40,
+        "category_id": 1,
+        "featured_status": false
+    },
+    {
+        "name": "Original PlayStation 4",
+        "description": "The original PlayStation 4 console, offering an immersive gaming experience.",
+        "image_url": "images/Consoles/Original-PlayStation-4.png",
+        "price": 299.99,
+        "stock": 30,
+        "category_id": 1,
+        "featured_status": false
+    },
+    {
+        "name": "Original PlayStation 3",
+        "description": "The original PlayStation 3 console, with Blu-ray capabilities and access to classic PS3 games.",
+        "image_url": "images/Consoles/Original-PS3.png",
+        "price": 249.99,
+        "stock": 25,
+        "category_id": 1,
+        "featured_status": false
+    },
+    {
+        "name": "Original PlayStation (PS1)",
+        "description": "The classic original PlayStation console, where it all started.",
+        "image_url": "images/Consoles/Original-PlayStation.jpg",
+        "price": 129.99,
+        "stock": 20,
+        "category_id": 1,
+        "featured_status": false
+    },
+    {
+        "name": "PlayStation Portable (PSP)",
+        "description": "The PlayStation Portable, offering gaming on the go with classic PS titles.",
+        "image_url": "images/Consoles/PlayStation-Portable.jpg",
+        "price": 99.99,
+        "stock": 15,
+        "category_id": 1,
+        "featured_status": false
+    },
+    {
+        "name": "Gran Turismo",
+        "description": "The classic Gran Turismo game for the PlayStation 1, featuring realistic racing simulations.",
+        "image_url": "images/Games/Gran-Turismo-PS1.png",
+        "price": 29.99,
+        "stock": 60,
+        "category_id": 2,
+        "featured_status": true
+    },
+    {
+        "name": "Grand Theft Auto: San Andreas",
+        "description": "A PS2 classic, GTA: San Andreas takes players on a journey through the fictional state of San Andreas.",
+        "image_url": "images/Games/Grand-Theft-Auto-San-Andreas-PS2.png",
+        "price": 29.99,
+        "stock": 50,
+        "category_id": 2,
+        "featured_status": false
+    },
+    {
+        "name": "Call of Duty: World at War",
+        "description": "The World War II shooter for PlayStation 3, featuring gritty campaigns and multiplayer.",
+        "image_url": "images/Games/Call-of-Duty-World-at-War PS3.png",
+        "price": 19.99,
+        "stock": 40,
+        "category_id": 2,
+        "featured_status": false
+    },
+    {
+        "name": "Horizon Zero Dawn: Complete Edition",
+        "description": "The complete edition of Horizon Zero Dawn, an action RPG featuring Aloy on her journey.",
+        "image_url": "images/Games/Horizon-Zero-Dawn-Complete-Edition-PS4.png",
+        "price": 39.99,
+        "stock": 35,
+        "category_id": 2,
+        "featured_status": false
+    },
+    {
+        "name": "Returnal",
+        "description": "The PS5 exclusive roguelike, featuring intense third-person action in a mysterious alien world.",
+        "image_url": "images/Games/Returnal-PS5.png",
+        "price": 34.99,
+        "stock": 20,
+        "category_id": 2,
+        "featured_status": false
+    },
+    {
+        "name": "DualSense Controller",
+        "description": "The DualSense Wireless Controller, featuring advanced haptic feedback and adaptive triggers.",
+        "image_url": "images/Accessories/DualSense.png",
+        "price": 69.99,
+        "stock": 200,
+        "category_id": 3,
+        "featured_status": true
+    },
+    {
+        "name": "DualShock 4 Controller",
+        "description": "The DualShock 4 wireless controller for PlayStation 4, offering precision control.",
+        "image_url": "images/Accessories/DualShock-4.png",
+        "price": 59.99,
+        "stock": 150,
+        "category_id": 3,
+        "featured_status": false
+    },
+    {
+        "name": "HyperX Cloud Alpha Wireless Gaming Headsets",
+        "description": "Wireless gaming headsets by HyperX, offering superior audio quality for gaming.",
+        "image_url": "images/Accessories/HyperX-Cloud-Alpha-Wireless.png",
+        "price": 179.99,
+        "stock": 75,
+        "category_id": 3,
+        "featured_status": false
+    },
+    {
+        "name": "PlayStation Icon Lights",
+        "description": "Decorate your room with the iconic PlayStation symbol lights, featuring colors that match the console.",
+        "image_url": "images/Decor/PlayStation-Icon-Lights.png",
+        "price": 25.99,
+        "stock": 100,
+        "category_id": 4,
+        "featured_status": false
+    },
+    {
+        "name": "Cole MacGrath Figure",
+        "description": "A collectible figure of Cole MacGrath, the protagonist from the inFamous series.",
+        "image_url": "images/Decor/Cole-MacGrath-Figure.png",
+        "price": 59.99,
+        "stock": 50,
+        "category_id": 4,
+        "featured_status": false
+    },
+    {
+        "name": "PlayStation Icons T-shirt",
+        "description": "A stylish t-shirt featuring the PlayStation symbols, perfect for any fan.",
+        "image_url": "images/Decor/PlayStation-logo-shirt.png",
+        "price": 29.99,
+        "stock": 80,
+        "category_id": 4,
+        "featured_status": false
+    }
+]
