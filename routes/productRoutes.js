@@ -21,6 +21,27 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Render the details page
+// http://localhost:3000/products/details/:id
+router.get('/details/:id', async (req, res) => {
+    const productId = req.params.id;
+    console.log(`GET /products/details/${productId} - Fetching product details`);
+
+    try {
+        const product = await productModel.getProductById(productId);
+        console.log('Product fetched:', product); // Add this to verify product retrieval
+        if (product) {
+            res.render('details', { product });
+        } else {
+            console.log(`Product with ID ${productId} not found`);
+            res.status(404).render('404', { error: 'Product not found' });
+        }
+    } catch (err) {
+        console.error('Error fetching product details:', err);
+        res.status(500).render('500', { error: 'Internal server error' });
+    }
+});
+
 // Get a single product by ID
 // GET http://localhost:3000/api/products/:id
 router.get('/:id', async (req, res) => {
@@ -188,5 +209,6 @@ router.post('/bulk-upload', upload.single('file'), (req, res) => {
         }
     });
 });
+
 
 module.exports = router;

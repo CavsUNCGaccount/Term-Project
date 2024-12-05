@@ -1,7 +1,15 @@
 <nav>
     <ul class="nav-bar">
         <li><a href="/">Home</a></li>
-        <li><a href="/products">Products</a></li>
+        <li class="dropdown">
+            <a href="/products" class="dropbtn">Products</a>
+            <ul class="dropdown-content">
+                <li><a href="/products#consoles">Consoles</a></li>
+                <li><a href="/products#games">Games</a></li>
+                <li><a href="/products#accessories">Accessories</a></li>
+                <li><a href="/products#decor">Decor</a></li>
+            </ul>
+        </li>
         <li><a href="/cart">View Shopping Cart</a></li>
         <li><a href="/admin/products">Manage Products</a></li>
         <li><a href="/admin/upload">Upload Products</a></li>

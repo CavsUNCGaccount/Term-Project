@@ -1,50 +1,73 @@
 <!DOCTYPE html>
-
 <html lang="en">
-    <!--
-    Name: Carlos Villarreal
-    Date: 09.13.2024
-    CSC 372-01
+<!--
+  Name: Carlos Villarreal
+  Date: 09.13.2024
+  CSC 372-01
 
-    This is the products page of my video game store. It contains the list of products available from the 4 different categories
-    which are consoles, games, accessories, and decor.
-    -->
+  This is the products page of my video game store. It contains the list of products available from the 4 different categories.
+-->
 
-    <head>
-        <meta charset="utf-8">
-        <title>PlayStation Nation - Products</title>
-        <link rel="stylesheet" href="styles/styles.css">
-        <script src="/js/products.js" defer></script>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <title>PlayStation Nation - Products</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <script src="/js/products.js" defer></script>
+</head>
 
-    <body>
+<body>
+    <header>
+        <!-- Include the Navbar -->
+        <%- include('partials/_navbar') %>
 
-        <header>
+        <h1><u>PlayStation Nation</u></h1>
 
-            <!-- Include the Navbar -->
-            <%- include('partials/_navbar') %>
+        <h3>Your journey to greatness starts here.</h3>
+    </header>
 
-            <h1><u>PlayStation Nation</u></h1>
+    <main>
+        <section class="product-categories">
+            <h2>All Products by their Categories</h2>
 
-            <h3>Your journey to greatness starts here.</h3>
-
-        </header>
-
-        <main>
-            <h1>All Products</h1>
-            
             <p>Click on "Add to Cart" to add one item to your cart.</p>
-            <div class="products-container" id="productsContainer">
-                <!-- Products will be inserted here via JavaScript -->
-            </div>
-        </main>        
 
-        <footer class="pre-format">
-            Copyright © 2024 PlayStation Nation
-            PlayStation Nation Productions
-            All rights reserved
-        </footer>
+            <!-- Console Products -->
+            <article class="category" id="consoles">
+                <h3>Consoles</h3>
+                <p>Explore our collection of PlayStation consoles, from the original PS1 to the latest PS5.</p>
+                <div class="product-list" id="console-products"></div>
+            </article>
 
-    </body>
+            <!-- Game Products -->
+            <article class="category" id="games">
+                <h3>Games</h3>
+                <p>Check out our list of games, from classic PS1 titles all the way to the latest PS5 releases.</p>
+                <div class="product-list" id="game-products"></div>
+            </article>
+
+            <!-- Accessories Products -->
+            <article class="category" id="accessories">
+                <h3>Accessories</h3>
+                <p>Find a variety of accessories such as controllers, headsets, charging stations, and more.</p>
+                <div class="product-list" id="accessories-products"></div>
+            </article>
+
+            <!-- Decor Products -->
+            <article class="category" id="decor">
+                <h3>Decor</h3>
+                <p>Show your love for PlayStation with our selection of themed decor and merchandise.</p>
+                <div class="product-list" id="decor-products"></div>
+            </article>
+        </section>
+    </main>
+
+    <footer class="pre-format">
+        Copyright © 2024 PlayStation Nation
+        PlayStation Nation Productions
+        All rights reserved
+    </footer>
+
+    
+</body>
 
 </html>

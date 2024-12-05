@@ -6,58 +6,42 @@
   Date: 09.28.2024
   CSC 372-01
 
-  This is the products detail page of my video game store. Right now, it justs contains the details of
-  one product that my store sells as this is just a sample. 
+  This is the products detail page of my video game store. It contains the details of
+  the selected product.
 -->
 
 <head>
     <meta charset="utf-8">
     <title>PlayStation Nation - Product Details</title>
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <script src="/js/details.js" defer></script>
 </head>
 
 <body>
 
     <header>
-
-        <%- include('partials/_navbar', { user: user }) %>
-
+        <%- include('partials/_navbar') %>
         <h1><u>PlayStation Nation</u></h1>
-
         <h3>Your journey to greatness starts here.</h3>
-
-        <% if (user) { %>
-            <p>Hello, <%= user.displayName %>!</p>
-        <% } %>        
-
     </header>
 
     <main>
         <section class="product-details">
             <div class="product-image">
-                <img src="images/Consoles/Original-PlayStation-5.png" alt="ps5">
+                <img src="/<%= product.Image_Url %>" alt="<%= product.Name %>">
             </div>
 
             <div class="product-info">
-                <h2>Original PlayStation 5</h2>
-                <h3>$499.99</h3>
+                <h2><%= product.Name %></h2>
+                <h3>$<%= product.Price.toFixed(2) %></h3>
                 <p>
-                    Welcome to the next generation of video game consoles. With an ultra fast SSD that gives
-                    it incredibly fast loading times, the PS5 is a piece of hardware all PlayStation enthusiasts
-                    must own. The new DualSense controller comes with haptic feedback and adapative triggers
-                    to further immerse you into the action of games. This model comes with a 4K blu-ray drive,
-                    so it is possible to watch 4K blu-ray movies.
+                    <%= product.Description %>
                 </p>
 
-                <ul class="product-specs">
-                    <li><b>Release Date:</b> November 12, 2020</li>
-                    <li><b>Manufacturer:</b> Sony Interactive Entertainment</li>
-                    <li><b>Storage:</b> 825GB SSD</li>
-                    <li><b>Resolution:</b> 4K UHD</li>
-                    <li><b>Compatibility:</b> Backwards compatible with 4000+ PS4 games</li>
-                </ul>
+                <!-- Stock Availability -->
+                <p><b>Stock:</b> <%= product.Stock %> </p>
 
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart" data-id="<%= product.Id %>">Add to Cart</button>
             </div>
         </section>
     </main>

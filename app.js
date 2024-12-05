@@ -44,10 +44,12 @@ app.get('/test', (req, res) => {
   res.send('Test route working!');
 });
 
+// Render the home page
 app.get('/', (req, res) => {
   res.render('index');
 });
 
+// Render the products page - displays a list of all products
 app.get('/products', async (req, res) => {
   try {
     
@@ -59,6 +61,10 @@ app.get('/products', async (req, res) => {
   }
 });
 
+// Use product routes for details page
+app.use('/products', productRoutes);
+
+// Render the cart page - shows all items in the active cart
 app.get('/cart', async (req, res) => {
   try {
     const cart = await cartModel.getActiveCart();
@@ -122,6 +128,7 @@ function calculateCartSummary(cartProducts) {
   };
 }
 
+// Render the checkout page
 app.get('/checkout', (req, res) => {
   console.log("Checkout route reached");
 
@@ -147,6 +154,7 @@ app.get('/checkout', (req, res) => {
   });
 });
 
+// Render the admin upload page (for bulk uploading products)
 app.get('/admin/upload', (req, res) => {
   res.render('admin/admin-upload');
 });
