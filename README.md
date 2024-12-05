@@ -17,6 +17,11 @@ PlayStation Nation is a retro video game e-commerce store that sells PlayStation
 - Node.js (v14 or above)
 - npm (Node Package Manager)
 - SQLite database browser (e.g., DB Browser for SQLite)
+- axios
+- better-sqlite3
+- ejs 
+- express
+- multer
 - check the packages.json file to see all the requirements.
 
 #### Installation Steps
