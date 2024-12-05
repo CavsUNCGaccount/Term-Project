@@ -11,7 +11,7 @@ PlayStation Nation is a retro video game e-commerce store that sells PlayStation
 - **Products Page**: Users can view all products available for sale, organized into different categories (Consoles, Games, Accessories, Decor).
 - **Shopping Cart**: Users can add products to their cart and view their current items in the shopping cart page.
 - **Checkout Page**: Users can proceed to a checkout page, which is currently a static placeholder without back-end functionality.
-- **Admin Capabilities**: Limited admin capabilities for managing products through dedicated endpoints (create, update, delete products).
+- **Admin Capabilities**: Limited admin capabilities for managing products through dedicated endpoints (create, update, delete products). Bulk uplodaing works, but does not take into account trying to upload duplicate items.
 
 #### Requirements
 - Node.js (v14 or above)
@@ -20,7 +20,7 @@ PlayStation Nation is a retro video game e-commerce store that sells PlayStation
 - check the packages.json file to see all the requirements.
 
 #### Installation Steps
-1. Clone this repository:
+1. Clone this repository or download a zip file of the project.
    ```bash
    git clone <repository-url>
    ```
@@ -58,9 +58,10 @@ PlayStation Nation is a retro video game e-commerce store that sells PlayStation
 3. **Checkout**: Click on the "Proceed to Checkout" button on the cart page to go to the checkout page. The checkout page currently displays placeholder data.
 
 ### Admin Capabilities (Endpoints)
-- **Add Product**: `POST /api/products` – Add a new product to the store (admin only).
-- **Update Product**: `PUT /api/products/:id` – Update product details (admin only).
-- **Delete Product**: `DELETE /api/products/:id` – Remove a product from the store (admin only).
+- **Add Product**: `POST /api/products` – Add a new product to the store. 
+- **Update Product**: `PUT /api/products/:id` – Update product details.
+- **Delete Product**: `DELETE /api/products/:id` – Remove a product from the store.
+- Note: Deleting a product with the current implementation does not work if that product is in the cart. Make sure remove it from the cart first. 
 
 ### Known Issues and Future Improvements
 - **Consolidation of Duplicate Cart Items**: Currently, adding the same product to the cart creates a new entry each time. Future improvements will focus on consolidating duplicate items and allowing quantity updates from the cart page.
@@ -73,5 +74,7 @@ The project uses an SQLite database to store products, categories, carts, and ca
 - **`Categories`**: Holds product categories (Consoles, Games, Accessories, Decor).
 - **`Carts`**: Tracks carts created by the user. The project is simplified to support only a single active cart.
 - **`CartProducts`**: Manages the items added to the cart.
+
+
 
 
