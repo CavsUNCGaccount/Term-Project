@@ -11,7 +11,7 @@ PlayStation Nation is a retro video game e-commerce store that sells PlayStation
 - **Products Page**: Users can view all products available for sale, organized into different categories (Consoles, Games, Accessories, Decor).
 - **Shopping Cart**: Users can add products to their cart and view their current items in the shopping cart page.
 - **Checkout Page**: Users can proceed to a checkout page, which is currently a static placeholder without back-end functionality.
-- **Admin Capabilities**: Limited admin capabilities for managing products through dedicated endpoints (create, update, delete products). Bulk uplodaing works, but does not take into account trying to upload duplicate items.
+- **Admin Capabilities**: Limited admin capabilities for managing products through dedicated endpoints (create, update, delete products). Bulk uploading works, but does not take into account trying to upload duplicate items.
 
 #### Requirements
 - Node.js (v14 or above)
