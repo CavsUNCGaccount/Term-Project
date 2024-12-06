@@ -4,6 +4,9 @@ const port = 3000;
 
 const path = require('path');
 
+// Import the method-override module
+const methodOverride = require('method-override');
+
 // Import models
 const cartModel = require('./models/cartModel');
 const productModel = require('./models/productModel');
@@ -20,6 +23,9 @@ function jsonParserMiddleware(req, res, next) {
 
 // Apply the middleware
 app.use(jsonParserMiddleware);
+
+// Use method-override middleware to handle PUT and DELETE methods from forms
+app.use(methodOverride('_method')); 
 
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
@@ -152,6 +158,42 @@ app.get('/checkout', (req, res) => {
           res.send(html);
       }
   });
+});
+
+// Render the admin products page to edit products
+app.get('/admin/products', async (req, res) => {
+  try {
+    console.log('Fetching products for admin page...');
+    const products = await productModel.getAllProducts();
+    console.log('Fetched products:', products);
+
+    if (!products || products.length === 0) {
+      console.warn('No products found.');
+    }
+
+    // Render the admin products page with the fetched products
+    res.render('admin/admin-products', { products });
+  } catch (err) {
+    console.error('Error fetching products:', err);
+    res.status(500).send('Internal server error');
+  }
+});
+
+// Render the edit product page by ID
+app.get('/admin/products/edit/:id', async (req, res) => {
+  const productId = req.params.id;
+
+  try {
+    const product = await productModel.getProductById(productId);
+    if (product) {
+      res.render('admin/products-edit', { product });
+    } else {
+      res.status(404).send('Product not found');
+    }
+  } catch (err) {
+    console.error('Error fetching product:', err);
+    res.status(500).send('Internal server error');
+  }
 });
 
 // Render the admin upload page (for bulk uploading products)

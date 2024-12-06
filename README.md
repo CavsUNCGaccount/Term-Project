@@ -11,7 +11,8 @@ PlayStation Nation is a retro video game e-commerce store that sells PlayStation
 - **Products Page**: Users can view all products available for sale, organized into different categories (Consoles, Games, Accessories, Decor).
 - **Shopping Cart**: Users can add products to their cart and view their current items in the shopping cart page.
 - **Checkout Page**: Users can proceed to a checkout page, which is currently a static placeholder without back-end functionality.
-- **Admin Capabilities**: Limited admin capabilities for managing products through dedicated endpoints (create, update, delete products). Bulk uploading works, but does not take into account trying to upload duplicate items.
+- **Admin Capabilities**: Admin functionalities such as editing products, deleting products, and bulk uploading are implemented. Bulk uploading works, but does not take into account trying to upload duplicate items. Deleting products will not work if a product is in a cart with the current implementation. To delete a product, remove it from the cart first. 
+Adding a single product is currently not implemented.
 
 #### Requirements
 - Node.js (v14 or above)
@@ -21,6 +22,7 @@ PlayStation Nation is a retro video game e-commerce store that sells PlayStation
 - better-sqlite3
 - ejs 
 - express
+- method-override
 - multer
 - check the packages.json file to see all the requirements.
 
@@ -61,6 +63,9 @@ PlayStation Nation is a retro video game e-commerce store that sells PlayStation
 1. **Browsing Products**: Navigate to the `/products` page to see a list of all products. Users can add items to their shopping cart by clicking "Add to Cart."
 2. **Viewing the Cart**: Navigate to the `/cart` page to view the items in the shopping cart, see the subtotal, tax, delivery fee, and total amount. Users can also remove items from the cart.
 3. **Checkout**: Click on the "Proceed to Checkout" button on the cart page to go to the checkout page. The checkout page currently displays placeholder data.
+4. **Bulk Upload** Upload of Products (Admin): Navigate to `/admin/upload` to bulk upload products using a JSON file. The uploaded file should contain an array of products to be added to the database. You have to upload a mininum iof 2 products.
+I've included 3 JSON files for bulk uploading: products.json, more-products.json, and test-products.json. All three are in the `/public/admin` directory. 
+5. **Editing and Deleting Products**: Navigate to /admin/products to view a list of all products. Users can edit product details or delete products using the available buttons.
 
 ### Admin Capabilities (Endpoints)
 - **Add Product**: `POST /api/products` – Add a new product to the store. 

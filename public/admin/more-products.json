@@ -1,0 +1,47 @@
+[
+    {
+        "name": "PlayStation VR2",
+        "description": "Experience next-gen virtual reality with the PlayStation VR2 headset, featuring stunning 4K HDR visuals and an immersive gaming experience.",
+        "image_url": "images/Accessories/PlayStation-VR-2.png",
+        "price": 549.99,
+        "stock": 25,
+        "category_id": 3,
+        "featured_status": false
+    },
+    {
+        "name": "Spider-Man: Miles Morales",
+        "description": "Swing into action as Miles Morales and save New York in this action-packed standalone adventure for PlayStation 5.",
+        "image_url": "images/Games/SpiderMan-Miles-Morales.png",
+        "price": 49.99,
+        "stock": 120,
+        "category_id": 2,
+        "featured_status": true
+    },
+    {
+        "name": "Ratchet & Clank: Rift Apart",
+        "description": "Join Ratchet and Clank on an interdimensional adventure with mind-blowing visuals and physics-defying gameplay for PlayStation 5.",
+        "image_url": "images/Games/Ratchet-and-Clank-Rift-Apart.png",
+        "price": 59.99,
+        "stock": 90,
+        "category_id": 2,
+        "featured_status": true
+    },
+    {
+        "name": "PlayStation 4 Slim",
+        "description": "The slimmer and lighter version of the PlayStation 4, delivering excellent gaming and entertainment with a sleek new design.",
+        "image_url": "images/Consoles/PlayStation-4-Slim.png",
+        "price": 299.99,
+        "stock": 40,
+        "category_id": 1,
+        "featured_status": false
+    },
+    {
+        "name": "Demon's Souls (PS5)",
+        "description": "The legendary classic returns, rebuilt from the ground up for PlayStation 5. Experience the unsettling darkness, intense combat, and challenging bosses in Demon's Souls.",
+        "image_url": "images/Games/Demon-Souls-PS5.png",
+        "price": 69.99,
+        "stock": 80,
+        "category_id": 2,
+        "featured_status": true
+    }
+]

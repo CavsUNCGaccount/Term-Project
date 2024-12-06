@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <!--
   Name: Carlos Villarreal
@@ -13,115 +12,50 @@
 <head>
     <meta charset="utf-8">
     <title>PlayStation Nation - Admin Products</title>
-    <link rel="stylesheet" href="../styles/admin.css">
-    <script src="/js/products-script.js" defer></script> <!-- Corrected path -->
+    <link rel="stylesheet" href="/styles/admin.css">
+    <script src="/js/admin-products.js" defer></script>
 </head>
 
 <body>
-
     <header>
-        <!-- Include the Navbar -->
         <%- include('../partials/_navbar') %>
-    
         <h1><u>PlayStation Nation</u></h1>
-    
         <h3>Your journey to greatness starts here.</h3>
-    </header>    
+    </header>
 
     <main class="main-content">
-        <h2><u>Administrator Product Listing Page</u></h2>
-
-        <label for="category-filter">Filter by Category:</label>
-        <select id="category-filter">
-            <option value="all">All Categories</option>
-            <option value="Consoles">Consoles</option>
-            <option value="Games">Games</option>
-            <option value="Accessories">Accessories</option>
-            <option value="Decor">Decor</option>
-        </select>
-
+        <h2 class="page-title"><u>Administrator Product Management</u></h2>
         <table class="product-table">
-
-            <!--Table headers-->
             <thead class="table-header">
                 <tr>
-                    <th>Product ID</th>
+                    <th>ID</th>
                     <th>Name</th>
-                    <th>Description</th>
-                    <th>Category ID</th>
-                    <th>Image</th>
+                    <th>Category</th>
                     <th>Price</th>
+                    <th>Stock</th>
                     <th>Actions</th>
                 </tr>
             </thead>
-
-            <tbody class="table-body">
-
-                <tr class="table-row">
-                    <td>101</td>
-                    <td>Original PlayStation 5</td>
-                    <td>Welcome to the next generation of video game consoles...</td>
-                    <td class="category">Consoles</td>
-                    <td><img class="product-image" src="../images/Consoles/Original-PlayStation-5.png" alt="PS5"></td>
-                    <td>$499.99</td>
-                    <td>
-                        <button class="delete">Delete</button>
-                        <button class="archive">Archive</button>
-                        <a class="edit" href="/admin/edit">Edit</a> <!-- Updated link to EJS -->
-                    </td>
-                </tr>
-
-                <tr class="table-row">
-                    <td>201</td>
-                    <td>Gran Turismo</td>
-                    <td>The racing simulator that started it all is here! Play the original PS1 release today!</td>
-                    <td class="category">Games</td>
-                    <td><img class="product-image" src="../images/Games/Gran-Turismo-PS1.png" alt="Gran Turismo"></td>
-                    <td>$29.99</td>
-                    <td>
-                        <button class="delete">Delete</button>
-                        <button class="archive">Archive</button>
-                        <a class="edit" href="/admin/edit">Edit</a> <!-- Updated link to EJS -->
-                    </td>
-                </tr>
-
-                <tr class="table-row">
-                    <td>301</td>
-                    <td>DualSense Controller</td>
-                    <td>Elevate your gaming with the DualSense Wireless Controller...</td>
-                    <td class="category">Accessories</td>
-                    <td><img class="product-image" src="../images/Accesories/DualSense.png" alt="DualSense"></td>
-                    <td>$69.99</td>
-                    <td>
-                        <button class="delete">Delete</button>
-                        <button class="archive">Archive</button>
-                        <a class="edit" href="/admin/edit">Edit</a> <!-- Updated link to EJS -->
-                    </td>
-                </tr>
-
-                <tr class="table-row">
-                    <td>401</td>
-                    <td>PlayStation Icon Lights</td>
-                    <td>Decorate your gaming setup with these shiny icon lights! They are an official PlayStation
-                        product!</td>
-                    <td class="category">Decor</td>
-                    <td><img class="product-image" src="../images/Decor/PlayStation-Icon-Lights.png" alt="PlayStation Icon Lights"></td>
-                    <td>$25.99</td>
-                    <td>
-                        <button class="delete">Delete</button>
-                        <button class="archive">Archive</button>
-                        <a class="edit" href="/admin/edit">Edit</a> <!-- Updated link to EJS -->
-                    </td>
-                </tr>
-
-                <!-- Only showing 4 products, 1 from each category for prototyping purposes. -->
+            <tbody>
+                <% products.forEach(product => { %>
+                    <tr class="table-row">
+                        <td><%= product.Id %></td>
+                        <td><%= product.Name %></td>
+                        <td><%= product.Category_Id %></td>
+                        <td>$<%= product.Price.toFixed(2) %></td>
+                        <td><%= product.Stock %></td>
+                        <td class="table-cell-actions">
+                            <a href="/admin/products/edit/<%= product.Id %>" class="edit action-button">Edit</a>
+                            <button class="delete action-button" data-id="<%= product.Id %>">Delete</button>
+                        </td>
+                    </tr>
+                <% }) %>
             </tbody>
         </table>
 
         <div class="add-product">
             <button id="add-product-button">Add New Product</button>
         </div>
-
     </main>
 
     <footer class="pre-format">
@@ -129,7 +63,6 @@
         PlayStation Nation Productions
         All rights reserved
     </footer>
-
 </body>
 
 </html>

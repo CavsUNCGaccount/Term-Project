@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <!--
   Name: Carlos Villarreal
@@ -12,28 +11,21 @@
 <head>
     <meta charset="utf-8">
     <title>PlayStation Nation - Edit Product</title>
-    <link rel="stylesheet" href="../styles/admin.css">
+    <link rel="stylesheet" href="/styles/admin.css">
+    <script src="/js/products-edit.js" defer></script>
 </head>
 
 <body>
-
     <header>
-        <!-- Include the Navbar -->
         <%- include('../partials/_navbar') %>
-    
         <h1><u>PlayStation Nation</u></h1>
-    
         <h3>Your journey to greatness starts here.</h3>
-    </header>    
-
-    <h1><u>Administrator</u></h1>
+    </header>
 
     <main class="form-main-content">
-        <h2 class="page-title"><u>Administrator Product Edit Page</u></h2>
+        <h2 class="page-title"><u>Edit Product Details</u></h2>
 
-        <!-- Product Edit Form -->
         <form class="admin-edit-form" action="/api/products/<%= product.Id %>?_method=PUT" method="POST">
-
             <!-- Product ID (Cannot be edited) -->
             <label for="product-id" class="form-label">Product ID:</label>
             <input type="text" id="product-id" class="form-input" name="product-id" value="<%= product.Id %>" readonly><br><br>
@@ -49,16 +41,19 @@
             <!-- Category -->
             <label for="category-id" class="form-label">Category:</label>
             <select id="category-id" class="form-select" name="category-id" required>
-                <option value="" disabled>Select a category</option>
-                <option value="Consoles" <%= product.Category_Id === 'Consoles' ? 'selected' : '' %>>Consoles</option>
-                <option value="Games" <%= product.Category_Id === 'Games' ? 'selected' : '' %>>Games</option>
-                <option value="Accessories" <%= product.Category_Id === 'Accessories' ? 'selected' : '' %>>Accessories</option>
-                <option value="Decor" <%= product.Category_Id === 'Decor' ? 'selected' : '' %>>Decor</option>
+                <option value="1" <%= product.Category_Id == 1 ? 'selected' : '' %>>Consoles</option>
+                <option value="2" <%= product.Category_Id == 2 ? 'selected' : '' %>>Games</option>
+                <option value="3" <%= product.Category_Id == 3 ? 'selected' : '' %>>Accessories</option>
+                <option value="4" <%= product.Category_Id == 4 ? 'selected' : '' %>>Decor</option>
             </select><br><br>
 
             <!-- Price -->
             <label for="price" class="form-label">Price:</label>
             <input type="number" id="price" class="form-input" name="price" value="<%= product.Price %>" step="0.01"><br><br>
+
+            <!-- Stock -->
+            <label for="stock" class="form-label">Stock:</label>
+            <input type="number" id="stock" class="form-input" name="stock" value="<%= product.Stock %>"><br><br>
 
             <!-- Image (Cannot be edited) -->
             <label for="image" class="form-label">Image:</label>
@@ -66,7 +61,6 @@
 
             <!-- Submit button to save changes -->
             <button type="submit" class="submit-button">Save Changes</button>
-
         </form>
     </main>
 
@@ -75,7 +69,6 @@
         PlayStation Nation Productions
         All rights reserved
     </footer>
-
 </body>
 
 </html>

@@ -92,7 +92,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Update a product (Admin only)
+// Update a product by ID
 // PUT http://localhost:3000/api/products/:id
 router.put('/:id', async (req, res) => {
     const productId = req.params.id;
