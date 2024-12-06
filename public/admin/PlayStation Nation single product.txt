@@ -1,0 +1,29 @@
+{
+    "name": "PlayStation Wireless Headset",
+    "description": "Experience high-fidelity audio with the PlayStation Wireless Headset, featuring a sleek design and 3D audio support.",
+    "image_url": "images/Accessories/PlayStation-Pulse-3D-Wireless.png",
+    "price": 99.99,
+    "stock": 20,
+    "category_id": 3,
+    "featured_status": false
+}
+
+JSON object for a single product above.
+
+To send a POST request with JSON data in Postman, follow these steps:
+
+Set Method: Make sure that the HTTP method is set to POST.
+
+Enter URL: Enter your endpoint URL, e.g., http://localhost:3000/api/products.
+
+Headers:
+
+Click on the "Headers" tab.
+Make sure there is a header set with Key: Content-Type and Value: application/json. This tells the server that you’re sending JSON data.
+
+Body:
+Click on the "Body" tab.
+Choose raw as the body type.
+In the dropdown next to the body type, select JSON.
+Paste your JSON data.
+Click send.
