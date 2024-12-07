@@ -44,7 +44,7 @@ Adding a single product is currently not implemented.
 
 4. Set up the SQLite database:
    - Ensure the database is set up correctly by running the provided SQL script in your SQLite browser.
-   - The database tables include `Products`, `Categories`, `Carts`, and `CartProducts`. Make sure they are created properly before running the server. The code already has the database with the tables. If you need to create a new one, run the SQL file create_tables.sql. The run the other sql files to add catergories and add 4 products, 1 of each category.
+   - The database tables include `Products`, `Categories`, `Carts`, and `CartProducts`. Make sure they are created properly before running the server. The code already has the database with the tables and prodcuts inserted. If you need to create a new database, create it and name it ecommerce.db, and then run the SQL file create_tables.sql. After that, run the sql file insert_categories.sql. You should now have the tables set up. Running insert_products.sql is optional since all the products there are in the JSON files for bulk upload.
 
 5. Run the server locally:
    'node app.js' using the git bash terminal.
